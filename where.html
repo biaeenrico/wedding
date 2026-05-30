@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo.png" type="image/png" sizes="32x32">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Outras Informações</title>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    .map {
+      width: 80%;
+      height: 350px;
+      border-radius: 12px;
+      margin: 12px 0;
+    }
+
+    .map-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .map-row.reverse { flex-direction: row-reverse; }
+
+    .location-photo {
+      width: 80%;
+      max-width: 480px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .subtitle {
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .section a {
+      color: #1a6bb8;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .section a:hover {
+      color: #134a7a;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menu">
+                <span class="hamburger" aria-hidden="true"></span>
+            </button>
+            <ul>
+                <li><a href="index.html">Página Inicial</a></li>
+                <li><a href="about.html">Nossa História</a></li>
+                <li><a href="where.html">Outras Informações</a></li>
+                <li><a href="presents.html">Presentes</a></li>
+                <li><a href="recados.html">RSVP</a></li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Outras Informações</h1>
+            <h2>Mais informações sobre a cerimônia e a recepção</h2>
+            <div class="divider"></div>
+        </header>
+
+        <main>
+            <section class="section">
+    <h1>Experiência Ophicina — Ophicina do Cabelo</h1>
+
+    <p class="subtitle">
+        Para esse momento único, temos uma condição <strong>exclusiva</strong> para nossas convidadas:
+        <br><br>
+
+        <strong>Maquiagem + Penteado</strong><br>
+        De R$ 768,00 por <strong>R$ 490,00</strong> (Pagamento em dinheiro ou Pix).
+        <br><br>
+
+        Para utilizar a promoção, basta informar o código: <strong>#Biacasa</strong>
+        <br><br>
+
+        Disponível em qualquer unidade da Ophicina do Cabelo — um dos salões mais tradicionais e renomados do Rio, conhecido pelo atendimento impecável, equipe altamente especializada e produções incríveis para eventos.
+        <br><br>
+
+        <a href="https://www.instagram.com/ophicinadocabelo/" target="_blank" rel="noopener noreferrer">Unidade Shopping Leblon</a>
+        <br>
+        <a href="https://www.instagram.com/ophicinadocabelobotafogo/" target="_blank" rel="noopener noreferrer">Unidade Botafogo</a>
+        <br>
+        <a href="https://www.instagram.com/ophicinadocabeloipanema/" target="_blank" rel="noopener noreferrer">Unidade Ipanema</a>
+    </p>
+</section>
+            <section class="section">
+                <h1>Cerimônia</h1>
+                <p class="subtitle">Nossa cerimônia será às 17:30, na Igreja Presbiteriana da Gávea, na Rua dos Oitis, 63</p>
+
+                <div class="map-row">
+                    <div id="map1" class="map"></div>
+                    <img src="img/IPG.jpg" alt="Local da cerimônia" class="location-photo" loading="lazy" decoding="async" />
+                </div>
+            </section>
+
+            <section class="section">
+                <h1>Recepção</h1>
+                <p class="subtitle">Logo depois, faremos a recepção às 20:00, no Paissandu Atlético Clube, na Avenida Afrânio de Melo Franco, 330</p>
+
+                <div class="map-row reverse">
+                    <img src="img/recepcao.jpeg" alt="Local da recepção" class="location-photo" loading="lazy" decoding="async" />
+                    <div id="map2" class="map"></div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h1>Traje</h1>
+                <p class="subtitle">Para este dia especial, sugerimos traje passeio completo.</p>
+            </section>
+        
+        </main>
+
+    </div>
+
+    <script>
+    // Mobile nav toggle
+    (function(){
+        const nav = document.querySelector('nav');
+        const btn = document.querySelector('.nav-toggle');
+        if (!nav || !btn) return;
+        btn.addEventListener('click', () => {
+            const open = nav.classList.toggle('nav-open');
+            btn.setAttribute('aria-expanded', open);
+            btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+        });
+        document.addEventListener('click', (e) => {
+            if (!nav.classList.contains('nav-open')) return;
+            if (!nav.contains(e.target)){
+                nav.classList.remove('nav-open');
+                btn.setAttribute('aria-expanded', 'false');
+                btn.setAttribute('aria-label', 'Abrir menu');
+            }
+        });
+    })();
+    </script>
+
+    <script>
+      const CERIMONIA = { lat: -22.974590301513672, lng: -43.22916793823242 };
+      const RECEPCAO  = { lat: -22.980099, lng: -43.218204 };
+
+      function initMaps() {
+        const map1 = new google.maps.Map(document.getElementById('map1'), { center: CERIMONIA, zoom: 16, disableDefaultUI: false });
+        new google.maps.Marker({ position: CERIMONIA, map: map1, title: 'Cerimônia' });
+
+        const map2 = new google.maps.Map(document.getElementById('map2'), { center: RECEPCAO, zoom: 16, disableDefaultUI: false });
+        new google.maps.Marker({ position: RECEPCAO, map: map2, title: 'Recepção' });
+      }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYGITzzf-OjO_VZWTkLoFb9gKxcBySRm4&callback=initMaps" async defer></script>
+</body>
+</html>

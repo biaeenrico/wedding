@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/logo.png" type="image/png" sizes="32x32">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa História - Enrico & Bia</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menu">
+                <span class="hamburger" aria-hidden="true"></span>
+            </button>
+            <ul>
+                <li><a href="index.html">Página Inicial</a></li>
+                <li><a href="about.html">Nossa História</a></li>
+                <li><a href="where.html">Outras Informações</a></li>
+                <li><a href="presents.html">Presentes</a></li>
+                <li><a href="recados.html">RSVP</a></li>
+            </ul>
+        </nav>
+        
+        <header>
+            <h1>Nossa História</h1>
+            <h2>Um pouco sobre nós</h2>
+            <div class="divider"></div>
+        </header>
+
+        <main>
+            <section>
+                <h3>Como Tudo Começou</h3>
+                <p>
+                    Nenhum de nós dois sabe quando nos conhecemos. Provavelmente foi por volta de 2010, quando Enrico começou a frequentar a igreja que Bia já frequentava. <br> <br>
+                    
+                    Crescemos, saímos da infância e entramos na adolescência. Foi nessa fase que, entre disputas e reconciliações, liderávamos juntos o grupo de adolescentes da igreja. <br> <br>
+                    
+                    Mas, em um retiro em 2019, tudo mudou. No meio de uma acirrada partida de truco, foi lançada uma aposta diferente: "Enrico, se você perder, vai chamar a Bia para sair na frente de todo mundo". <br> <br>
+                    
+                    E não deu outra: partida perdida. O corajoso Enrico, então com 14 anos, foi lá e fez. A resposta superou as expectativas: "ok, uma vez".
+                    <br> <br>
+                    Como talvez seja possível perceber, não foi só uma vez. Saímos outras vezes, sempre com o apoio fundamental de grandes amigos.
+                    <br> <br>
+                    Em pouco tempo, já não havia mais nada a esconder (e na verdade, nem queríamos). Todo mundo já sabia. Começamos a namorar um mês depois do nosso primeiro encontro.
+                    <br> <br>
+                    Desde então, já se passaram mais de 7 anos. Vivemos, crescemos, amadurecemos e chegamos até aqui, cheios de histórias para contar. E, com a certeza de que a melhor delas ainda nem começou!
+                </p>
+            </section>
+
+            <section class="couple-photo">
+                <img src="./img/biaenrico.jpeg" alt="Enrico e Bia" loading="lazy">
+            </section>
+        </main>
+
+    </div>
+
+    <script>
+    // Mobile nav toggle
+    (function(){
+        const nav = document.querySelector('nav');
+        const btn = document.querySelector('.nav-toggle');
+        if (!nav || !btn) return;
+        btn.addEventListener('click', () => {
+            const open = nav.classList.toggle('nav-open');
+            btn.setAttribute('aria-expanded', open);
+            btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+        });
+        document.addEventListener('click', (e) => {
+            if (!nav.classList.contains('nav-open')) return;
+            if (!nav.contains(e.target)){
+                nav.classList.remove('nav-open');
+                btn.setAttribute('aria-expanded', 'false');
+                btn.setAttribute('aria-label', 'Abrir menu');
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

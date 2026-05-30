@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/logo.png" type="image/png" sizes="32x32">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrico & Bia</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class = "container">
+        <nav>
+            <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menu">
+                <span class="hamburger" aria-hidden="true"></span>
+            </button>
+            <ul>
+                <li><a href="index.html">Página Inicial</a></li>
+                <li><a href="about.html">Nossa História</a></li>
+                <li><a href="where.html">Outras Informações</a></li>
+                 <li><a href="presents.html">Presentes</a></li>
+                 <li><a href="recados.html">RSVP</a></li>
+            </ul>
+        </nav>
+    <header class="home-header">
+        <h1 id="typed-name"></h1>
+        <h2>8 de agosto de 2026</h2>
+        <div class="divider"></div>
+        <a class="cta" href="recados.html">Confirmar Presença</a>
+    </header>
+
+    <main>
+      <section class="countdown-section">
+        <div class="countdown-container">
+            <div class="time-box">
+            <div id="months" class="time-number">00</div>
+            <div class="time-label">MESES</div>
+            </div>
+            <div class="colon">:</div>
+            <div class="time-box">
+            <div id="days" class="time-number">00</div>
+            <div class="time-label">DIAS</div>
+            </div>
+            <div class="colon">:</div>
+            <div class="time-box">
+            <div id="hours" class="time-number">00</div>
+            <div class="time-label">HORAS</div>
+            </div>
+            <div class="colon">:</div>
+            <div class="time-box">
+            <div id="minutes" class="time-number">00</div>
+            <div class="time-label">MINUTOS</div>
+            </div>
+            <div class="colon">:</div>
+            <div class="time-box">
+            <div id="seconds" class="time-number">00</div>
+            <div class="time-label">SEGUNDOS</div>
+            </div>
+        </div>
+        </section>
+
+        <section>
+            <h3>Um breve (realmente breve) resumo</h3>
+            <p>
+                Olá, querido convidado :)<br>
+                Muito obrigada por acessar o nosso site! Estamos muito, muito felizes em compartilhar esse momento tão especial com você. <br>
+                Depois de 7 lindos anos juntos, chegou a hora de darmos o passo mais importante das nossas vidas. E não poderíamos imaginar esse dia sem a presença de pessoas tão especiais ao nosso lado! <br> <br>
+            </p>
+        </section>
+        <section>
+            <h3>Sobre este site</h3>
+            <p>
+                Como vocês sabem, a noiva que vos fala é Engenheira da Computação. Por isso, ela nunca teve dúvidas de que faria esse site. <br>
+                Peço que considerem que todo esse site foi feito de maneira totalmente amadora; caso haja algum bug ou algo que não esteja funcionando direito, por favor nos avisem! <br>
+                OBS: O noivo está aprendendo a programar e também ajudou :D  <br>
+            </p>
+        </section>
+    </main>
+    </div>
+    <script>
+    const targetDate = new Date("2026-08-08T18:00:00");
+
+    function updateCountdown() {
+        const now = new Date();
+        let totalSeconds = Math.floor((targetDate - now) / 1000);
+
+        if (totalSeconds <= 0) {
+        document.querySelector(".countdown-container").innerHTML = "Já é o grande dia!";
+        return;
+        }
+
+        const secondsInMinute = 60;
+        const secondsInHour = 3600;
+        const secondsInDay = 86400;
+        const avgSecondsInMonth = 2629800; // Aproximadamente 30,44 dias
+
+        const months = Math.floor(totalSeconds / avgSecondsInMonth);
+        totalSeconds -= months * avgSecondsInMonth;
+
+        const days = Math.floor(totalSeconds / secondsInDay);
+        totalSeconds -= days * secondsInDay;
+
+        const hours = Math.floor(totalSeconds / secondsInHour);
+        totalSeconds -= hours * secondsInHour;
+
+        const minutes = Math.floor(totalSeconds / secondsInMinute);
+        const seconds = totalSeconds % secondsInMinute;
+
+        document.getElementById("months").textContent = String(months).padStart(2, '0');
+        document.getElementById("days").textContent = String(days).padStart(2, '0');
+        document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+        document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+        document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    </script>
+    <script>
+    const text = "Maria Beatriz & Enrico"; // Your custom name
+    const nameElement = document.getElementById("typed-name");
+
+    function typeEffect(text, element, speed = 100) {
+        let i = 0;
+        const cursor = document.createElement("span");
+        cursor.className = "cursor";
+        element.appendChild(cursor);
+
+        const typing = setInterval(() => {
+        if (i < text.length) {
+            cursor.insertAdjacentText("beforebegin", text.charAt(i));
+            i++;
+        } else {
+            clearInterval(typing);
+            // remove the cursor once typing finishes
+            cursor.remove();
+        }
+        }, speed);
+    }
+
+    window.onload = () => typeEffect(text, nameElement);
+    </script>
+    <script>
+    // Mobile nav toggle
+    (function(){
+        const nav = document.querySelector('nav');
+        const btn = document.querySelector('.nav-toggle');
+        if (!nav || !btn) return;
+        btn.addEventListener('click', () => {
+            const open = nav.classList.toggle('nav-open');
+            btn.setAttribute('aria-expanded', open);
+            btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+        });
+        // close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!nav.classList.contains('nav-open')) return;
+            if (!nav.contains(e.target)){
+                nav.classList.remove('nav-open');
+                btn.setAttribute('aria-expanded', 'false');
+                btn.setAttribute('aria-label', 'Abrir menu');
+            }
+        });
+    })();
+    </script>
+
+
+</body>
+</html>

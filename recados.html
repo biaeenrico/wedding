@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/logo.png" type="image/png" sizes="32x32">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recados & Confirmação — Enrico & Bia</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .rsvp-card {
+            max-width: 620px;
+            margin: 28px auto 40px auto;
+            background: rgba(255,255,255,0.85);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(30,40,30,0.07);
+            padding: 36px 40px;
+        }
+
+        .rsvp-card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            color: #2f4b3f;
+            margin: 0 0 24px 0;
+            text-align: center;
+        }
+
+        .field {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field label {
+            font-size: 13px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: #6b8a75;
+            font-weight: 500;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px 14px;
+            border: 1.5px solid rgba(76,146,116,0.25);
+            border-radius: 10px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            color: #262626;
+            background: #fafaf8;
+            outline: none;
+            transition: border-color 180ms ease, box-shadow 180ms ease;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: #2b7a57;
+            box-shadow: 0 0 0 3px rgba(43,122,87,0.09);
+            background: #fff;
+        }
+
+        .field textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .field select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b8a75' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+
+        .divider { width: 64px; height: 4px; background: linear-gradient(90deg,#cfe7d1,#e7f0ea); border-radius: 3px; margin: 0 auto 28px auto; }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            background: #2b7a57;
+            color: white;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px;
+            letter-spacing: 0.5px;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(32,64,48,0.14);
+            transition: background 180ms ease, transform 160ms ease, box-shadow 160ms ease;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            background: #215f42;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(32,64,48,0.2);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Success message (shown after submission) */
+        .success-msg {
+            display: none;
+            text-align: center;
+            padding: 32px 24px;
+        }
+        .success-msg .check {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        .success-msg h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            color: #2f4b3f;
+            margin: 0 0 8px 0;
+        }
+        .success-msg p {
+            color: #6b8a75;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        /* Hidden honeypot */
+        .hp { display: none; }
+
+        @media (max-width: 640px) {
+            .rsvp-card { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <nav>
+        <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menu">
+            <span class="hamburger" aria-hidden="true"></span>
+        </button>
+        <ul>
+            <li><a href="index.html">Página Inicial</a></li>
+            <li><a href="about.html">Nossa História</a></li>
+            <li><a href="where.html">Outras Informações</a></li>
+            <li><a href="presents.html">Presentes</a></li>
+            <li><a href="recados.html">RSVP</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Recados & Confirmação</h1>
+        <h2>8 de Agosto de 2026</h2>
+        <div class="divider"></div>
+    </header>
+
+    <main>
+        <div class="rsvp-card">
+            <h2>Formulário de Presença</h2>
+
+            <!-- ✅ STEP 2: Replace YOUR_FORM_ID with your actual Formspree ID -->
+            <form id="rsvp-form" action="https://formspree.io/f/mpqnrgbd" method="POST">
+
+                <!-- Honeypot anti-spam field (leave it hidden) -->
+                <div class="hp">
+                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+                </div>
+
+                <!-- Redirect back to this page after submit -->
+                <input type="hidden" name="_next" value="recados.html">
+
+                <div class="field">
+                    <label for="name">Seu nome completo *</label>
+                    <input type="text" id="name" name="name" placeholder="Ex: Maya Aragão" required>
+                </div>
+
+                <div class="field">
+                    <label for="attending">Vai conseguir comparecer? *</label>
+                    <select id="attending" name="attending" required>
+                        <option value="" disabled selected>Selecione...</option>
+                        <option value="sim">Sim, estarei lá! 🎉</option>
+                        <option value="nao">Infelizmente não poderei ir 😢</option>
+                    </select>
+                </div>
+
+                <div class="field" id="guests-field">
+                    <label for="guests">Quantas pessoas no total? (incluindo você) *</label>
+                    <select id="guests" name="guests" required>
+                        <option value="" disabled selected>Selecione...</option>
+                        <option value="1">1 pessoa (só eu)</option>
+                        <option value="2">2 pessoas</option>
+                        <option value="3">3 pessoas</option>
+                        <option value="4">4 pessoas</option>
+                        <option value="5+">5 ou mais</option>
+                    </select>
+                </div>
+
+                <div class="field" id="additional-guests-field">
+                    <label for="additional-guests">Quem vem com você? *</label>
+                    <textarea id="additional-guests" name="additional-guests" placeholder="Ex: Larissa Manoela, Shohei Ono..." rows="3"></textarea>
+                </div>
+
+                <div class="field">
+                    <label for="message">Recado para os noivos (opcional)</label>
+                    <textarea id="message" name="message" placeholder="Se quiser, deixe um recadinho para nós... 💌"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Confirmar Presença</button>
+            </form>
+
+            <div class="success-msg" id="success-msg">
+                <div class="check">💚</div>
+                <h3>Recebemos sua confirmação!</h3>
+                <p>Obrigada por responder!</p>
+            </div>
+        </div>
+    </main>
+
+    
+</div>
+
+<script>
+// Mobile nav toggle
+(function(){
+    const nav = document.querySelector('nav');
+    const btn = document.querySelector('.nav-toggle');
+    if (!nav || !btn) return;
+    btn.addEventListener('click', () => {
+        const open = nav.classList.toggle('nav-open');
+        btn.setAttribute('aria-expanded', open);
+        btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    });
+    document.addEventListener('click', (e) => {
+        if (!nav.classList.contains('nav-open')) return;
+        if (!nav.contains(e.target)){
+            nav.classList.remove('nav-open');
+            btn.setAttribute('aria-expanded', 'false');
+            btn.setAttribute('aria-label', 'Abrir menu');
+        }
+    });
+})();
+
+
+const form = document.getElementById('rsvp-form');
+const successMsg = document.getElementById('success-msg');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.submit-btn');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    const data = new FormData(form);
+    const response = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+    } else {
+        btn.textContent = 'Confirmar Presença';
+        btn.disabled = false;
+        alert('Ops! Algo deu errado. Tente novamente ou fale com a gente.');
+    }
+});
+
+const attendingSelect = document.getElementById('attending');
+const guestsField = document.getElementById('guests-field');
+
+function updateGuestsField() {
+    if (attendingSelect.value === 'sim') {
+        guestsField.style.display = 'block';
+    } else {
+        guestsField.style.display = 'none';
+        const additionalGuestsField = document.getElementById('additional-guests-field');
+        if (additionalGuestsField) {
+            additionalGuestsField.style.display = 'none';
+        }
+    }
+}
+
+attendingSelect.addEventListener('change', updateGuestsField);
+
+// Inicialmente verificar
+updateGuestsField();
+
+// Mostrar/ocultar campo adicional de nomes baseado na seleção de convidados
+const guestsSelect = document.getElementById('guests');
+const additionalGuestsField = document.getElementById('additional-guests-field');
+
+guestsSelect.addEventListener('change', () => {
+    if (guestsSelect.value !== '1') {
+        additionalGuestsField.style.display = 'block';
+    } else {
+        additionalGuestsField.style.display = 'none';
+    }
+});
+
+// Inicialmente ocultar
+additionalGuestsField.style.display = 'none';
+</script>
+</body>
+</html>
